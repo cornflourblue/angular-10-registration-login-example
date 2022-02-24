@@ -2,7 +2,6 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-
 import { AccountService, AlertService } from '@app/_services';
 
 @Component({ templateUrl: 'register.component.html' })
@@ -21,22 +20,22 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit() {
         this.form = this.formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            username: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]]
-        });
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.minLength(8)]],
+            confirmPassword: ['',[Validators.required, Validators.minLength(8)]]
+          }
+        );
     }
 
     // convenience getter for easy access to form fields
     get f() { return this.form.controls; }
-
     onSubmit() {
         this.submitted = true;
 
         // reset alerts on submit
         this.alertService.clear();
 
+        // this.alertService.error("Password and Confirm Password Did not Match");
         // stop here if form is invalid
         if (this.form.invalid) {
             return;

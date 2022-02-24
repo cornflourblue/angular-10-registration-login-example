@@ -4,5 +4,7 @@
     password: string;
     firstName: string;
     lastName: string;
+    email : string;
+    confirmPassword : string;
     token: string;
 }
